@@ -40,3 +40,9 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/", http.StatusFound)
 }
+
+func Delete(w http.ResponseWriter, r *http.Request) {
+	id, _ := strconv.Atoi(r.URL.Query().Get("id")) 
+	models.Delete(id)
+	http.Redirect(w, r, "/", http.StatusFound)
+}

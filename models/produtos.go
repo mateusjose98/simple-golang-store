@@ -5,6 +5,7 @@ import (
 	"loja/db"
 )
 type Product struct {
+	Id 			int
 	Name        string
 	Description string
 	Price       float64
@@ -13,6 +14,7 @@ type Product struct {
 
 const SQL_INSERT_ONE = "INSERT INTO produtos(nome, descricao, preco, quantidade) VALUES ($1, $2, $3, $4)"
 const SQL_FIND_ALL = "SELECT * FROM produtos"
+const SQL_DELETE_BY_ID = "DELETE FROM produtos WHERE id = $1"
 
 func FindAll() []Product {
 	products := []Product{}
@@ -33,7 +35,7 @@ func FindAll() []Product {
 		if err != nil {
 			panic(err.Error())
 		}
-		products = append(products, Product{name, description, price, quantity})
+		products = append(products, Product{id, name, description, price, quantity})
 	}
 
 	defer db.Close()
@@ -57,4 +59,19 @@ func Create(product Product) {
 	defer db.Close()
 
 
+}
+
+func Delete(id int) {
+	fmt.Println(id)
+
+	db := db.GetConnection()
+
+	stmt, err := db.Prepare(SQL_DELETE_BY_ID)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	stmt.Exec(id)
+	defer db.Close()
 }

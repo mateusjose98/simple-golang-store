@@ -1,23 +1,6 @@
 {{define "Index"}}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!-- Compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <title>Alura loja</title>
-  </head>
-  <nav class="navbar navbar-light bg-light mb-4">
-    <a class="navbar-brand" href="/">Alura Loja</a>
-  </nav>
+{{template "_head"}}
+{{template "_menu"}}
 
   <body>
     <div class="container">
@@ -30,6 +13,7 @@
                 <th>Descrição</th>
                 <th>Preço</th>
                 <th>Quantidade</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -39,6 +23,7 @@
                 <td>{{.Description}}</td>
                 <td>{{.Price}}</td>
                 <td>{{.Quantity}}</td>
+                <td><a class="btn red" href="/delete?id={{.Id}}">Del</a></td>
               </tr>
               {{end}}
             </tbody>
