@@ -23,7 +23,9 @@
                 <td>{{.Description}}</td>
                 <td>{{.Price}}</td>
                 <td>{{.Quantity}}</td>
-                <td><a class="btn red" href="/delete?id={{.Id}}">Del</a></td>
+                <td><a class="btn red" href="/delete?id={{.Id}}">Del</a>
+                  <a class="btn blue" href="/edit?id={{.Id}}">Edit</a>
+                </td>
               </tr>
               {{end}}
             </tbody>
@@ -33,6 +35,7 @@
       <div>
         <a href="/new" class="m-3 waves-effect waves-light btn">+ Novo</a>
       </div>
+      
     </div>
   </body>
 </html>
