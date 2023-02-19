@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"loja/db"
 )
 type Product struct {
@@ -10,6 +11,7 @@ type Product struct {
 	Quantity    int
 }
 
+const SQL_INSERT_ONE = "INSERT INTO produtos(nome, descricao, preco, quantidade) VALUES ($1, $2, $3, $4)"
 const SQL_FIND_ALL = "SELECT * FROM produtos"
 
 func FindAll() []Product {
@@ -36,5 +38,23 @@ func FindAll() []Product {
 
 	defer db.Close()
 	return products
+
+}
+
+func Create(product Product) {
+
+	fmt.Println(product)
+
+	db := db.GetConnection()
+
+	stmt, err := db.Prepare(SQL_INSERT_ONE)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	stmt.Exec(product.Name, product.Description, product.Price, product.Quantity)
+	defer db.Close()
+
 
 }
